@@ -67,15 +67,26 @@
             color: white;
             transition: .4s;
         }
-        .nav-link.__bg-primary:hover, .nav-link.__bg-secondary:hover{
+        .nav-link.__bg-primary:hover, .nav-link.__bg-secondary:hover, .btn.__bg-primary:hover{
             background-color: #2E29A3;
+            color: #fff;
             transition: .4s;
         }
         .__bg-dark{
-            background-color: #100E3D;
+            background-color: #212445;
         }
         .__bg-light{
             background-color: #EFEFEF;
+        }
+        .__bg-success{
+            background-color: #30A36C;
+        }
+        .card-subtitle{
+            font-size: 12px !important;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
     @yield('custom-style')
@@ -152,8 +163,12 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>
         feather.replace();
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    @yield('custom-js')
+    @yield('custom-scripts')
 </body>
 </html>

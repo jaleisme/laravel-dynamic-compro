@@ -8,7 +8,7 @@
                 </a>
                 <ul class="nav nav-pills flex-column mb-auto align-items-center align-items-sm-start w-100" id="menu">
                     <li class="nav-item">
-                        <a href="/admin/home" class="nav-link text-white align-middle __bg-primary">
+                        <a href="/admin/home" class="nav-link text-white align-middle @if(\Request::route()->getName() == 'home') __bg-primary @endif">
                             <i data-feather="layout"></i> <span class="ms-1">Dashboard</span>
                         </a>
                     </li>
@@ -16,11 +16,11 @@
                         <small class="">PAGES</small>
                     </li>
                     <li class="nav-item">
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link text-white align-middle __bg-secondary">
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link text-white align-middle @if(\Request::route()->getName() == 'hero.index') __bg-secondary @endif">
                             <i data-feather="map"></i> <span class="ms-1 d-none d-sm-inline">Landing Page</span>
                         </a>
-                        <ul class="collapse show nav flex-column w-100" id="submenu1" data-bs-parent="#menu">
-                            <li class="nav-item __bg-primary">
+                        <ul class="collapse @if(\Request::route()->getName() == 'hero.index') show @endif nav flex-column w-100" id="submenu1" data-bs-parent="#menu">
+                            <li class="nav-item @if(\Request::route()->getName() == 'hero.index') __bg-primary @endif">
                                 <a href="{{ url('/admin/hero') }}" class="nav-link text-white"> <span class="d-none d-sm-inline">Hero</span></a>
                             </li>
                         </ul>

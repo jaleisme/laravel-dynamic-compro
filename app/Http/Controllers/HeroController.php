@@ -6,6 +6,7 @@ use App\Models\Hero;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\File\UploadedFile as FileUploadedFile;
 
 class HeroController extends Controller
@@ -51,9 +52,13 @@ class HeroController extends Controller
                 'is_active' => filter_var($request->is_active, FILTER_VALIDATE_BOOLEAN)
             ]);
         } catch (QueryException $e) {
-            return redirect('/admin/hero')->with('error', $e);
+            Session::flash('message', $e);
+            Session::flash('type', 'alert-danger');
+            return redirect('/admin/hero');
         }
-        return redirect('/admin/hero')->with('success', 'Success!');
+        Session::flash('message', 'A new record has been added!');
+        Session::flash('type', 'alert-success');
+        return redirect('/admin/hero');
     }
 
     /**
@@ -75,7 +80,15 @@ class HeroController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = null;
+        try{
+            $data = Hero::findOrFail($id);
+        } catch (QueryException $e) {
+            Session::flash('message', $e);
+            Session::flash('type', 'alert-danger');
+            return redirect('/admin/hero');
+        }
+        return view('admin.hero.edit', compact(['data']));
     }
 
     /**
@@ -87,7 +100,35 @@ class HeroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Hero::findOrFail($id);
+
+        if($data){
+            try{
+                $data->title = $request->title;
+                $data->subtitle = $request->subtitle;
+                $data->is_active = filter_var($request->is_active, FILTER_VALIDATE_BOOLEAN);
+
+                // Check if there's a file
+                $file = $request->file('image');
+                if($file){
+                    $fileName = auth()->id() . '_' . time() . '.'. $request->file('image')->extension();
+                    $request->file('image')->move(public_path('file'), $fileName);
+                    $data->image = $fileName;
+                }
+                $data->update();
+            } catch(QueryException $e){
+                Session::flash('message', $e);
+                Session::flash('type', 'alert-danger');
+            }
+            Session::flash('message', 'A record has been updated!');
+            Session::flash('type', 'alert-warning');
+            return redirect('/admin/hero');
+        } else {
+            Session::flash('message', 'Data not existed!');
+            Session::flash('type', 'alert-danger');
+            return redirect('/admin/hero');
+        }
+        return redirect('/admin/hero');
     }
 
     /**
@@ -98,6 +139,15 @@ class HeroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            Hero::findOrFail($id)->delete();
+        } catch (QueryException $e) {
+            Session::flash('message', $e);
+            Session::flash('type', 'alert-danger');
+            return redirect('/admin/hero');
+        }
+        Session::flash('message', 'A record has been deleted!');
+        Session::flash('type', 'alert-danger');
+        return redirect('/admin/hero');
     }
 }
