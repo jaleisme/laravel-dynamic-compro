@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hero;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Symfony\Component\HttpFoundation\File\UploadedFile as FileUploadedFile;
 
 class HeroController extends Controller
 {
@@ -13,7 +17,8 @@ class HeroController extends Controller
      */
     public function index()
     {
-        //
+        $data = Hero::all();
+        return view('admin.hero.main', compact(['data']));
     }
 
     /**
@@ -23,7 +28,7 @@ class HeroController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.hero.create');
     }
 
     /**
@@ -34,7 +39,21 @@ class HeroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fileName = auth()->id() . '_' . time() . '.'. $request->file('image')->extension();
+        $title = $request->title;
+        $subtitle = $request->subtitle;
+        $request->file('image')->move(public_path('file'), $fileName);
+        try{
+            Hero::create([
+                'image' => $fileName,
+                'title' => $title,
+                'subtitle' => $subtitle,
+                'is_active' => filter_var($request->is_active, FILTER_VALIDATE_BOOLEAN)
+            ]);
+        } catch (QueryException $e) {
+            return redirect('/admin/hero')->with('error', $e);
+        }
+        return redirect('/admin/hero')->with('success', 'Success!');
     }
 
     /**
