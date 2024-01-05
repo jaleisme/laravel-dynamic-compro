@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Maps;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class MapsController extends Controller
 {
@@ -13,7 +16,8 @@ class MapsController extends Controller
      */
     public function index()
     {
-        //
+        $data = Maps::all();
+        return view('admin.maps.main', compact(['data']));
     }
 
     /**
@@ -23,7 +27,7 @@ class MapsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.maps.create');
     }
 
     /**
@@ -34,7 +38,27 @@ class MapsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $activeCheck = Maps::where('is_active', 1)->first();
+        if($activeCheck && $request->is_active === "true"){
+            $activeCheck->is_active = false;
+            $activeCheck->update();
+        }
+        $alias_name = $request->alias_name;
+        $link = $request->link;
+        try{
+            Maps::create([
+                'alias_name' => $alias_name,
+                'link' => $link,
+                'is_active' => filter_var($request->is_active, FILTER_VALIDATE_BOOLEAN)
+            ]);
+        } catch (QueryException $e) {
+            Session::flash('message', $e);
+            Session::flash('type', 'alert-danger');
+            return redirect('/admin/maps');
+        }
+        Session::flash('message', 'A new record has been added!');
+        Session::flash('type', 'alert-success');
+        return redirect('/admin/maps');
     }
 
     /**
@@ -56,7 +80,15 @@ class MapsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = null;
+        try{
+            $data = Maps::findOrFail($id);
+        } catch (QueryException $e) {
+            Session::flash('message', $e);
+            Session::flash('type', 'alert-danger');
+            return redirect('/admin/maps');
+        }
+        return view('admin.maps.edit', compact(['data']));
     }
 
     /**
@@ -68,7 +100,32 @@ class MapsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->is_active === "true"){
+            $activeCheck = Maps::where('is_active', 1)->first();
+            $activeCheck->is_active = false;
+            $activeCheck->update();
+        }
+        $data = Maps::findOrFail($id);
+
+        if($data){
+            try{
+                $data->alias_name = $request->alias_name;
+                $data->link = $request->link;
+                $data->is_active = filter_var($request->is_active, FILTER_VALIDATE_BOOLEAN);
+                $data->update();
+            } catch(QueryException $e){
+                Session::flash('message', $e);
+                Session::flash('type', 'alert-danger');
+            }
+            Session::flash('message', 'A record has been updated!');
+            Session::flash('type', 'alert-warning');
+            return redirect('/admin/maps');
+        } else {
+            Session::flash('message', 'Data not existed!');
+            Session::flash('type', 'alert-danger');
+            return redirect('/admin/maps');
+        }
+        return redirect('/admin/maps');
     }
 
     /**
@@ -79,6 +136,15 @@ class MapsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            Maps::findOrFail($id)->delete();
+        } catch (QueryException $e) {
+            Session::flash('message', $e);
+            Session::flash('type', 'alert-danger');
+            return redirect('/admin/maps');
+        }
+        Session::flash('message', 'A record has been deleted!');
+        Session::flash('type', 'alert-danger');
+        return redirect('/admin/maps');
     }
 }
