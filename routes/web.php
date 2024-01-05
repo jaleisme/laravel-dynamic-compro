@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AlasanController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GalleryController;
@@ -32,4 +33,5 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
     Route::resource('/client', ClientController::class);
     Route::resource('/gallery', GalleryController::class);
     Route::resource('/maps', MapsController::class);
+    Route::resource('/about', AboutController::class);
 });

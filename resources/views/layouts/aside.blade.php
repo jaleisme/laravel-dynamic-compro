@@ -40,9 +40,12 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="/admin/about" class="nav-link text-white align-middle @if(\Request::route()->getName() == 'about.index') __bg-primary @endif">
+                            <i data-feather="list"></i> <span class="ms-1">About</span>
+                        </a>
+                    </li>
                 </ul>
-                <hr>
-                <small class="w-100 text-center">Copyright &copy; 2024 - {{ env('APP_AUTHOR') }}</small>
             </div>
         </div>
     </div>

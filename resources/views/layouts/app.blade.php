@@ -19,6 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
+        button.trix-button, .trix-button-row{
+            display: none !important;
+        }
         *{
             font-family: 'Poppins';
             font-size: 14px;
@@ -103,6 +106,7 @@
         }
     </style>
     @yield('custom-style')
+    @trixassets
 </head>
 <body>
     <div id="app">
@@ -116,7 +120,7 @@
                 <div class="col-2 p-0">
                     @include('layouts.aside')
                 </div>
-                <div class="col-10 __bg-light">
+                <div class="col-10 __bg-light pb-3">
                     <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm mb-3">
                         <div class="container-fluid">
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
