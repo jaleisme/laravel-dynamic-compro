@@ -64,10 +64,10 @@
                             <a class="nav-link" aria-current="page" href="/about">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/projects">Projek</a>
+                            <a class="nav-link" aria-current="page" href="/projects">Projek</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/blogs">Blog</a>
+                            <a class="nav-link active" aria-current="page" href="/blogs">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/login">Login</a>
@@ -84,16 +84,18 @@
             <!-- OVERVIEW SECTION -->
             <div class="row w-100 pt-5">
                 <div class="col-12 mb-3">
-                    <h3>Projek Kami</h3>
+                    <h3>Blog Kami</h3>
                 </div>
-                @foreach($projects as $val)
+                @foreach($blogs as $val)
                 <div class="col-3">
                     <div class="card w-100">
                         <img src="{{ asset('/file/'.$val->image) }}" class="card-img-top" alt="{{ $val->image }}" style="width: 100%; height:256px; object-fit: cover; border-radius: 8px;">
                         <div class="card-body">
                             <div class="badge __bg-primary mb-3">{{ $val->category_name }}</div>
-                            <h5 class="card-title m-0">{{ $val->title }}</h5>
-                            <p class="card-text m-0">{!! $val->description !!}</p>
+                            <h5 class="card-title m-0 mb-5">{{ $val->title }}</h5>
+                            <div class="d-grid">
+                                <a href="/blog/read/{{ $val->id }}" class="button btn __bg-primary text-white btn-block">Baca Sekarang</a>
+                            </div>
                         </div>
                     </div>
                 </div>

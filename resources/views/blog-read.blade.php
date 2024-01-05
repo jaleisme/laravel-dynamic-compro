@@ -64,10 +64,10 @@
                             <a class="nav-link" aria-current="page" href="/about">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/projects">Projek</a>
+                            <a class="nav-link" aria-current="page" href="/projects">Projek</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/blogs">Blog</a>
+                            <a class="nav-link active" aria-current="page" href="/blogs">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/login">Login</a>
@@ -84,20 +84,19 @@
             <!-- OVERVIEW SECTION -->
             <div class="row w-100 pt-5">
                 <div class="col-12 mb-3">
-                    <h3>Projek Kami</h3>
+                    <h3>Blog Kami</h3>
                 </div>
-                @foreach($projects as $val)
-                <div class="col-3">
+
+                <div class="col-12 pb-5">
                     <div class="card w-100">
-                        <img src="{{ asset('/file/'.$val->image) }}" class="card-img-top" alt="{{ $val->image }}" style="width: 100%; height:256px; object-fit: cover; border-radius: 8px;">
+                        <img src="{{ asset('/file/'.$blog->image) }}" class="card-img-top" alt="{{ $blog->image }}" style="width: 100%; height:256px; object-fit: cover; border-radius: 8px;">
                         <div class="card-body">
-                            <div class="badge __bg-primary mb-3">{{ $val->category_name }}</div>
-                            <h5 class="card-title m-0">{{ $val->title }}</h5>
-                            <p class="card-text m-0">{!! $val->description !!}</p>
+                            <div class="badge __bg-primary mb-3">{{ $blog->category_name }}</div>
+                            <h5 class="card-title m-0 mb-3">{{ $blog->title }}</h5>
+                            {!! $blog->description !!}
                         </div>
                     </div>
                 </div>
-                @endforeach
             </div>
             <!-- END OF OVERVIEW SECTION -->
 

@@ -42,4 +42,19 @@ class LandingController extends Controller
         // dd($projects);
         return view('projects', compact(['projects']));
     }
+
+    public function blogs(){
+        $data = DB::table('blog')->select('blog.*', 'blog_category.name AS category_name')->join('blog_category', 'blog_category.id', '=', 'blog.category_id')->get()->groupBy('blog.id');
+        $data = Collection::unwrap($data);
+        $data = reset($data);
+        $blogs = $data;
+        // dd($blogs);
+        return view('blogs', compact(['blogs']));
+    }
+
+    public function blog_read($id){
+        $blog = DB::table('blog')->select('blog.*', 'blog_category.name AS category_name')->join('blog_category', 'blog_category.id', '=', 'blog.category_id')->where('blog.id', $id)->first();
+        // dd($blog);
+        return view('blog-read', compact(['blog']));
+    }
 }

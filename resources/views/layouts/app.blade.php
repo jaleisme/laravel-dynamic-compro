@@ -87,7 +87,7 @@
         .card-subtitle, .card-description{
             font-size: 12px !important;
         }
-        .card-subtitle, .card-description, .card-title{
+        .card-subtitle, .card-description, .card-title, .card-subtitle > div, .card-description > div{
             display: block;
             white-space: nowrap;
             overflow: hidden;

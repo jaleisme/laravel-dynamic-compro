@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use App\Models\ProjectCategory;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
-class ProjectController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +20,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $data = DB::table('project')->select('project.*', 'project_category.name AS category_name')->join('project_category', 'project_category.id', '=', 'project.category_id')->get()->groupBy('project.id');
+        $data = DB::table('blog')->select('blog.*', 'blog_category.name AS category_name')->join('blog_category', 'blog_category.id', '=', 'blog.category_id')->get()->groupBy('blog.id');
         $data = Collection::unwrap($data);
         $data = reset($data);
-        return view('admin.project.main', compact(['data']));
+        return view('admin.blog.main', compact(['data']));
     }
 
     /**
@@ -33,8 +33,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $category = ProjectCategory::all();
-        return view('admin.project.create', compact(['category']));
+        $category = BlogCategory::all();
+        return view('admin.blog.create', compact(['category']));
     }
 
     /**
@@ -48,7 +48,7 @@ class ProjectController extends Controller
         $fileName = auth()->id() . '_' . time() . '.'. $request->file('image')->extension();
         $request->file('image')->move(public_path('file'), $fileName);
         try{
-            Project::create([
+            Blog::create([
                 'image' => $fileName,
                 'title' => $request->title,
                 'description' => $request->description,
@@ -57,11 +57,11 @@ class ProjectController extends Controller
         } catch (QueryException $e) {
             Session::flash('message', $e);
             Session::flash('type', 'alert-danger');
-            return redirect('/admin/project');
+            return redirect('/admin/blog');
         }
         Session::flash('message', 'A new record has been added!');
         Session::flash('type', 'alert-success');
-        return redirect('/admin/project');
+        return redirect('/admin/blog');
     }
 
     /**
@@ -83,9 +83,9 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        $data = DB::table('project')->select('project.*', 'project_category.name AS category_name')->join('project_category', 'project_category.id', '=', 'project.category_id')->where('project.id', $id)->first();
-        $category = ProjectCategory::all();
-        return view('admin.project.edit', compact(['category', 'data']));
+        $data = DB::table('blog')->select('blog.*', 'blog_category.name AS category_name')->join('blog_category', 'blog_category.id', '=', 'blog.category_id')->where('blog.id', $id)->first();
+        $category = BlogCategory::all();
+        return view('admin.blog.edit', compact(['category', 'data']));
     }
 
     /**
@@ -97,7 +97,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Project::findOrFail($id);
+        $data = blog::findOrFail($id);
 
         if($data){
             try{
@@ -119,13 +119,13 @@ class ProjectController extends Controller
             }
             Session::flash('message', 'A record has been updated!');
             Session::flash('type', 'alert-warning');
-            return redirect('/admin/project');
+            return redirect('/admin/blog');
         } else {
             Session::flash('message', 'Data not existed!');
             Session::flash('type', 'alert-danger');
-            return redirect('/admin/project');
+            return redirect('/admin/blog');
         }
-        return redirect('/admin/project');
+        return redirect('/admin/blog');
     }
 
     /**
@@ -137,7 +137,7 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         try{
-            $data = Project::findOrFail($id);
+            $data = Blog::findOrFail($id);
             $image_path = "/file/".$data->image;  // Value is not URL but directory file path
             if(File::exists($image_path)) {
                 File::delete($image_path);
@@ -146,10 +146,10 @@ class ProjectController extends Controller
         } catch (QueryException $e) {
             Session::flash('message', $e);
             Session::flash('type', 'alert-danger');
-            return redirect('/admin/project');
+            return redirect('/admin/blog');
         }
         Session::flash('message', 'A record has been deleted!');
         Session::flash('type', 'alert-danger');
-        return redirect('/admin/project');
+        return redirect('/admin/blog');
     }
 }

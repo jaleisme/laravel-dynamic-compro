@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectsTable extends Migration
+class CreateBlogCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('project', function (Blueprint $table) {
+        Schema::create('blog_category', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
-            $table->string('title');
-            $table->longtext('description');
+            $table->string('name');
             $table->timestamps();
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('project_category');
         });
     }
 
@@ -31,6 +27,6 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project');
+        Schema::dropIfExists('blog_category');
     }
 }

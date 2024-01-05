@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AlasanController;
+use App\Http\Controllers\BlogCategoryController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HeroController;
@@ -26,6 +28,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/about', [LandingController::class, 'about'])->name('about');
 Route::get('/projects', [LandingController::class, 'projects'])->name('projects');
+Route::get('/blogs', [LandingController::class, 'blogs'])->name('blogs');
+Route::get('/blog/read/{id}', [LandingController::class, 'blog_read'])->name('blog-read');
 
 Auth::routes();
 
@@ -40,4 +44,6 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
     Route::resource('/about', AboutController::class);
     Route::resource('/project-category', ProjectCategoryController::class);
     Route::resource('/project', ProjectController::class);
+    Route::resource('/blog-category', BlogCategoryController::class);
+    Route::resource('/blog', BlogController::class);
 });

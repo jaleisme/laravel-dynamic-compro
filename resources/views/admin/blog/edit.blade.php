@@ -4,9 +4,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 mb-3">
-            <h3 class="fw-bold">Edit Project Content</h3>
+            <h3 class="fw-bold">Edit Blog Content</h3>
         </div>
-        <form action="{{ route('project.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('blog.update', $data->id) }}" method="POST" enctype="multipart/form-data">
             @CSRF
             @method('PUT')
             <div class="row">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-8" style="height: auto;">
                     <div class="form-group">
-                        <label class="mb-2" for="">Project Snapshot</label>
+                        <label class="mb-2" for="">Blog Image</label>
                         <input type="file" name="image" class="form-control">
                     </div>
                     <div class="form-group mt-3">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group mt-3">
                         <label class="mb-2">Category</label>
-                        <select class="form-select form-control" aria-label="Project Category" name="category_id">
+                        <select class="form-select form-control" aria-label="Blog Category" name="category_id">
                             <option selected disabled>Choose one</option>
                             @foreach($category as $key => $val)
                             <option value="{{ $val->id }}" @if($val->id == $data->category_id) selected @endif>{{ $val->name }}</option>
@@ -40,7 +40,7 @@
                         </select>
                     </div>
                     <div class="d-flex justify-content-end mt-3">
-                        <a href="/admin/project" class="button btn btn-secondary me-3">Back</a>
+                        <a href="/admin/blog" class="button btn btn-secondary me-3">Back</a>
                         <button type="submit" class="button btn btn-primary">Submit</button>
                     </div>
                 </div>
