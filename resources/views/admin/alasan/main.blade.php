@@ -13,7 +13,10 @@
         <div class="col-12">
             <div class="card" style="border-radius: 16px;">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center py-4 px-4">
-                    <span style="font-weight: bold; font-size: 16px;">Alasan Section Management</span>
+                    <div class="title d-flex flex-column">
+                        <span style="font-weight: bold; font-size: 16px;">Alasan Section Management</span>
+                        <small>Menu manajemen konten di section alasan.</small>
+                    </div>
                     <a href="{{route('alasan.create')}}" class="button btn __bg-primary px-3 py-2 d-flex align-items-center" style="font-size: 14px;"><i data-feather="plus-circle" class="me-2"></i> Add New Record</a>
                 </div>
                 <div class="card-body row">

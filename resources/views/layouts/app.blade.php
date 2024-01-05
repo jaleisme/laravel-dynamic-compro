@@ -84,12 +84,17 @@
         .__bg-success{
             background-color: #30A36C;
         }
-        .card-subtitle{
+        .card-subtitle, .card-description{
             font-size: 12px !important;
             display: block;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        .nav-link.dropdown-toggle:hover{
+            background-color: #EFEFEF;
+            color: #2b2b2b;
+            transition: .4s;
         }
     </style>
     @yield('custom-style')
