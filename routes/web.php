@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlasanController;
 use App\Http\Controllers\HeroController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,5 @@ Auth::routes();
 Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('/hero', HeroController::class);
+    Route::resource('/alasan', AlasanController::class);
 });

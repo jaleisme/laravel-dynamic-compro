@@ -6,6 +6,7 @@ use App\Models\Hero;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\File\UploadedFile as FileUploadedFile;
 
@@ -140,7 +141,12 @@ class HeroController extends Controller
     public function destroy($id)
     {
         try{
-            Hero::findOrFail($id)->delete();
+            $data = Hero::findOrFail($id);
+            $image_path = "/file/".$data->image;  // Value is not URL but directory file path
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
+            $data->delete();
         } catch (QueryException $e) {
             Session::flash('message', $e);
             Session::flash('type', 'alert-danger');

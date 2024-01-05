@@ -57,6 +57,14 @@
         .ms-3{
             margin-left: 16px !important;
         }
+        .nav-link:hover, .btn.__bg-primary:hover{
+            background-color: #2E29A3;
+            color: #fff;
+            transition: .4s;
+        }
+        .__text-primary{
+            color: #4940FF;
+        }
         .__bg-primary{
             background-color: #4940FF;
             color: white;
@@ -65,11 +73,6 @@
         .__bg-secondary{
             background-color: #2A2770;
             color: white;
-            transition: .4s;
-        }
-        .nav-link.__bg-primary:hover, .nav-link.__bg-secondary:hover, .btn.__bg-primary:hover{
-            background-color: #2E29A3;
-            color: #fff;
             transition: .4s;
         }
         .__bg-dark{

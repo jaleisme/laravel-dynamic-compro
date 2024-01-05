@@ -13,8 +13,8 @@
         <div class="col-12">
             <div class="card" style="border-radius: 16px;">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center py-4 px-4">
-                    <span style="font-weight: bold; font-size: 16px;">Hero Content Management</span>
-                    <a href="{{route('hero.create')}}" class="button btn __bg-primary px-3 py-2 d-flex align-items-center" style="font-size: 14px;"><i data-feather="plus-circle" class="me-2"></i> Add New Record</a>
+                    <span style="font-weight: bold; font-size: 16px;">Alasan Section Management</span>
+                    <a href="{{route('alasan.create')}}" class="button btn __bg-primary px-3 py-2 d-flex align-items-center" style="font-size: 14px;"><i data-feather="plus-circle" class="me-2"></i> Add New Record</a>
                 </div>
                 <div class="card-body row">
                     @if(count($data) < 1)
@@ -41,10 +41,10 @@
                                     @endif
                                 </div>
                                 <div class="actions d-flex flex-row">
-                                    <a href="{{ route('hero.edit', $val->id) }}" class="btn btn-sm btn-warning me-2">
+                                    <a href="{{ route('alasan.edit', $val->id) }}" class="btn btn-sm btn-warning me-2">
                                         <i data-feather="edit"></i>
                                     </a>
-                                    <form action="{{ route('hero.destroy', $val->id) }}" method="POST">
+                                    <form action="{{ route('alasan.destroy', $val->id) }}" method="POST">
                                         @CSRF
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-danger" type="submit">
@@ -56,7 +56,7 @@
                             <div class="bottom">
                                 <span class="card-title" style="font-size: 16px; font-weight: bold;">{{$val->title}}</span>
                                 <br>
-                                <span class="card-subtitle">{{ $val->subtitle }}</span>
+                                <span class="card-subtitle">{{ $val->description }}</span>
                             </div>
                         </div>
                     </div>
