@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlasanController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HeroController;
 use App\Http\Controllers\LayananController;
 use Illuminate\Support\Facades\Route;
@@ -27,4 +28,5 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
     Route::resource('/hero', HeroController::class);
     Route::resource('/alasan', AlasanController::class);
     Route::resource('/layanan', LayananController::class);
+    Route::resource('/client', ClientController::class);
 });

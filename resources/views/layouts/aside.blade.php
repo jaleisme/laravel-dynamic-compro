@@ -16,10 +16,10 @@
                         <small class="">PAGES</small>
                     </li>
                     <li class="nav-item">
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link text-white align-middle @if(\Request::route()->getName() == 'hero.index' || \Request::route()->getName() == 'alasan.index' || \Request::route()->getName() == 'layanan.index') __bg-secondary @endif">
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link text-white align-middle @if(\Request::route()->getName() == 'hero.index' || \Request::route()->getName() == 'alasan.index' || \Request::route()->getName() == 'layanan.index' || \Request::route()->getName() == 'client.index') __bg-secondary @endif">
                             <i data-feather="map"></i> <span class="ms-1 d-none d-sm-inline">Landing Page</span>
                         </a>
-                        <ul class="collapse @if(\Request::route()->getName() == 'hero.index' || \Request::route()->getName() == 'alasan.index' || \Request::route()->getName() == 'layanan.index') show @endif nav flex-column w-100" id="submenu1" data-bs-parent="#menu">
+                        <ul class="collapse @if(\Request::route()->getName() == 'hero.index' || \Request::route()->getName() == 'alasan.index' || \Request::route()->getName() == 'layanan.index' || \Request::route()->getName() == 'client.index') show @endif nav flex-column w-100" id="submenu1" data-bs-parent="#menu">
                             <li class="nav-item @if(\Request::route()->getName() == 'hero.index') __bg-primary @endif">
                                 <a href="{{ url('/admin/hero') }}" class="nav-link text-white"> <span class="d-none d-sm-inline">Section Hero</span></a>
                             </li>
@@ -28,6 +28,9 @@
                             </li>
                             <li class="nav-item @if(\Request::route()->getName() == 'layanan.index') __bg-primary @endif">
                                 <a href="{{ url('/admin/layanan') }}" class="nav-link text-white"> <span class="d-none d-sm-inline">Section Layanan</span></a>
+                            </li>
+                            <li class="nav-item @if(\Request::route()->getName() == 'client.index') __bg-primary @endif">
+                                <a href="{{ url('/admin/client') }}" class="nav-link text-white"> <span class="d-none d-sm-inline">Section Client</span></a>
                             </li>
                         </ul>
                     </li>
