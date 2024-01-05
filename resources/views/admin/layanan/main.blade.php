@@ -58,7 +58,6 @@
                             </div>
                             <div class="bottom">
                                 <span class="card-title" style="font-size: 16px; font-weight: bold;">{{$val->title}}</span>
-                                <br>
                                 <span class="card-description">{{ $val->description }}</span>
                             </div>
                         </div>

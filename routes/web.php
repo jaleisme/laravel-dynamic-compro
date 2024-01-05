@@ -4,6 +4,7 @@ use App\Http\Controllers\AlasanController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HeroController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\MapsController;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingController::class, 'index'])->name('landing');
 
 Auth::routes();
 

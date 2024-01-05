@@ -86,10 +86,15 @@
         }
         .card-subtitle, .card-description{
             font-size: 12px !important;
+        }
+        .card-subtitle, .card-description, .card-title{
             display: block;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        .card-title{
+            max-height: 20px;
         }
         .nav-link.dropdown-toggle:hover{
             background-color: #EFEFEF;

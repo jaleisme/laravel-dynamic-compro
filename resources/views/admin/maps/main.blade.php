@@ -36,7 +36,7 @@
                     </center>
                     @else
                     @foreach($data as $key => $val)
-                    <div class="card card-dark border-white __bg-dark p-0 text-white col-3">
+                    <div class="card card-dark __bg-dark p-0 text-white col-3">
                         <div class="card-header p-2">
                             <div class="top d-flex justify-content-between">
                                 <div class="status">

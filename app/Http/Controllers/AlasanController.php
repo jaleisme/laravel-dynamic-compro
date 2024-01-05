@@ -39,11 +39,10 @@ class AlasanController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->is_active === "true"){
-            $activeCheck = Alasan::where('is_active', 1)->first();
+        $activeCheck = Alasan::where('is_active', 1)->first();
+        if($activeCheck && $request->is_active === "true"){
             $activeCheck->is_active = false;
             $activeCheck->update();
-
         }
         $fileName = auth()->id() . '_' . time() . '.'. $request->file('image')->extension();
         $title = $request->title;
@@ -106,13 +105,11 @@ class AlasanController extends Controller
     public function update(Request $request, $id)
     {
         $data = Alasan::findOrFail($id);
-
         if($data){
-            if($request->is_active === "true"){
-                $activeCheck = Alasan::where('is_active', 1)->first();
+            $activeCheck = Alasan::where('is_active', 1)->first();
+            if($activeCheck && $id != $activeCheck->id && $request->is_active === "true"){
                 $activeCheck->is_active = false;
                 $activeCheck->update();
-
             }
             try{
                 $data->title = $request->title;
