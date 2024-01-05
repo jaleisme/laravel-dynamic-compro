@@ -19,9 +19,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-        button.trix-button, .trix-button-row{
-            display: none !important;
-        }
         *{
             font-family: 'Poppins';
             font-size: 14px;

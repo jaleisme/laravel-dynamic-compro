@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('custom-style')
-<style>#google-maps-canvas img{max-height:none;max-width:none!important;background:none!important;}</style>
-@endsection
-
 @section('content')
 <div class="container-fluid">
 @if(Session::has('message'))
@@ -18,10 +14,10 @@
             <div class="card" style="border-radius: 16px;">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center py-4 px-4">
                     <div class="title d-flex flex-column">
-                        <span style="font-weight: bold; font-size: 16px;">Maps Section Management</span>
-                        <small>Menu manajemen konten di section maps.</small>
+                        <span style="font-weight: bold; font-size: 16px;">Project Management</span>
+                        <small>Menu manajemen projek.</small>
                     </div>
-                    <a href="{{route('maps.create')}}" class="button btn __bg-primary px-3 py-2 d-flex align-items-center" style="font-size: 14px;"><i data-feather="plus-circle" class="me-2"></i> Add New Record</a>
+                    <a href="{{route('project.create')}}" class="button btn __bg-primary px-3 py-2 d-flex align-items-center" style="font-size: 14px;"><i data-feather="plus-circle" class="me-2"></i> Add New Record</a>
                 </div>
                 <div class="card-body row">
                     @if(count($data) < 1)
@@ -36,21 +32,18 @@
                     </center>
                     @else
                     @foreach($data as $key => $val)
-                    <div class="card bg-white p-0 col-3">
-                        <div class="card-header p-2">
+                    <div class="card p-0 text-white col-3" style="height: 180px;">
+                        <img src="{{ asset('/file/'.$val->image) }}" alt="{{$val->image}}" class="card-image" style="width: 100%; height:100%; object-fit: cover; border-radius: 8px;">
+                        <div class="card-img-overlay d-flex flex-column justify-content-between p-3" style="background: rgb(15,15,15); background: linear-gradient(0deg, rgba(15,15,15,1) 0%, rgba(255,255,255,0) 100%);">
                             <div class="top d-flex justify-content-between">
                                 <div class="status">
-                                    @if($val->is_active === 1)
-                                    <div class="badge __bg-success">Active</div>
-                                    @else
-                                    <div class="badge bg-danger">Not Active</div>
-                                    @endif
+                                    <div class="badge __bg-primary">{{ $val->category_name }}</div>
                                 </div>
                                 <div class="actions d-flex flex-row">
-                                    <a href="{{ route('maps.edit', $val->id) }}" class="btn btn-sm btn-warning me-2">
+                                    <a href="{{ route('project.edit', $val->id) }}" class="btn btn-sm btn-warning me-2">
                                         <i data-feather="edit"></i>
                                     </a>
-                                    <form action="{{ route('maps.destroy', $val->id) }}" method="POST">
+                                    <form action="{{ route('project.destroy', $val->id) }}" method="POST">
                                         @CSRF
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-danger" type="submit">
@@ -59,17 +52,9 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <div style="list-style:none; transition: none;overflow:hidden;width:100%;height:100%;">
-                                <div id="google-maps-canvas" style="height:100%; width:100%;">
-                                    <iframe class="w-100" frameborder="0" src="{{ $val->link }}"></iframe>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex flex-column justify-content-between p-3">
                             <div class="bottom">
-                                <span class="card-title" style="max-height:32px !important; font-size: 16px; font-weight: bold;">{{$val->alias_name}}</span>
+                                <span class="card-title" style="font-size: 16px; font-weight: bold;">{{$val->title}}</span>
+                                <span class="card-subtitle">{!! $val->description !!}</span>
                             </div>
                         </div>
                     </div>

@@ -45,6 +45,19 @@
                             <i data-feather="list"></i> <span class="ms-1">About</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link text-white align-middle @if(\Request::route()->getName() == 'project-category.index' || \Request::route()->getName() == 'project.index') __bg-secondary @endif">
+                            <i data-feather="briefcase"></i> <span class="ms-1 d-none d-sm-inline">Projects</span>
+                        </a>
+                        <ul class="collapse @if(\Request::route()->getName() == 'project-category.index') show @endif nav flex-column w-100" id="submenu2" data-bs-parent="#menu">
+                            <li class="nav-item @if(\Request::route()->getName() == 'project-category.index') __bg-primary @endif">
+                                <a href="{{ url('/admin/project-category') }}" class="nav-link text-white"> <span class="d-none d-sm-inline">Project Category</span></a>
+                            </li>
+                            <li class="nav-item @if(\Request::route()->getName() == 'project.index') __bg-primary @endif">
+                                <a href="{{ url('/admin/project') }}" class="nav-link text-white"> <span class="d-none d-sm-inline">Project Master</span></a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

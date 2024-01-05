@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AboutController extends Controller
 {
@@ -71,16 +72,17 @@ class AboutController extends Controller
     public function update(Request $request, $id)
     {
         $data = About::where('id', $id)->first();
-        $fileName = '';
-        if($request->file('image')){
+        if($request->file('image') != null){
             $fileName = auth()->id() . '_' . time() . '.'. $request->file('image')->extension();
             $request->file('image')->move(public_path('file'), $fileName);
+            $data->image = $fileName;
         }
         $data->description = $request->description;
         $data->visi = $request->visi;
         $data->misi = $request->misi;
-        $data->image = $fileName;
         $data->update();
+        Session::flash('message', 'About has been updated!');
+        Session::flash('type', 'alert-warning');
         return redirect('/admin/about');
         // dd($request);
     }

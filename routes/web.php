@@ -8,6 +8,8 @@ use App\Http\Controllers\HeroController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\MapsController;
+use App\Http\Controllers\ProjectCategoryController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/about', [LandingController::class, 'about'])->name('about');
+Route::get('/projects', [LandingController::class, 'projects'])->name('projects');
 
 Auth::routes();
 
@@ -34,4 +38,6 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
     Route::resource('/gallery', GalleryController::class);
     Route::resource('/maps', MapsController::class);
     Route::resource('/about', AboutController::class);
+    Route::resource('/project-category', ProjectCategoryController::class);
+    Route::resource('/project', ProjectController::class);
 });
