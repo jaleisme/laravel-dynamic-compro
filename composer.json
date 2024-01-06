@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "orangehill/iseed": "^3.0",
         "te7a-houdini/laravel-trix": "^2.0"
     },
     "require-dev": {
