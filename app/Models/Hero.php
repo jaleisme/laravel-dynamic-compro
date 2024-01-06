@@ -9,4 +9,5 @@ class Hero extends Model
 {
     use HasFactory;
     protected $table = 'hero';
+    protected $fillable = ['image', 'title', 'subtitle', 'is_active'];
 }
