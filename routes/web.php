@@ -5,6 +5,8 @@ use App\Http\Controllers\AlasanController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FooterController;
+use App\Http\Controllers\FooterLinkController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HeroController;
 use App\Http\Controllers\LandingController;
@@ -46,4 +48,6 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
     Route::resource('/project', ProjectController::class);
     Route::resource('/blog-category', BlogCategoryController::class);
     Route::resource('/blog', BlogController::class);
+    Route::resource('/footer', FooterController::class);
+    Route::put('/footer-link/{id}', [FooterController::class, 'editLink'])->name('edit-link');
 });

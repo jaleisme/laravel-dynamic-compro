@@ -14,9 +14,17 @@
 
         <title>{{env('APP_NAME')}}</title>
         <style>
+            body{
+                height: 100vh;
+            }
             *{
                 font-family: 'Poppins';
                 font-size: 14px;
+            }
+            .__bg-primary{
+                background-color: #4940FF;
+                color: white;
+                transition: .4s;
             }
             .carousel > .carousel-inner > .carousel-item > img{
                 width:100%; /* Yeap you can change the width and height*/
@@ -60,7 +68,7 @@
     </head>
     <body>
         <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white mt-auto">
             <div class="container-fluid">
                 <a class="navbar-brand" style="font-weight: bold;" href="#">{{ env('APP_NAME') }}</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -194,6 +202,35 @@
         </div>
         <!-- END OF CONTAINER FLUID -->
 
+        <!-- FOOTER -->
+        <nav class="navbar sticky-bottom bg-dark">
+            <div class="container-fluid d-lfex justify-content-between p-5 text-white">
+                <div class="links w-25 d-flex flex-column">
+                    <a class="navbar-brand text-white" href="#">{{ env('APP_NAME') }}</a>
+                    <a class="mt-2 text-white text-decoration-none" href="/home">Home</a>
+                    <a class="mt-2 text-white text-decoration-none" href="/about">Tentang Kami</a>
+                    <a class="mt-2 text-white text-decoration-none" href="/projects">Projek</a>
+                    <a class="mt-2 text-white text-decoration-none" href="/blogs">Blog</a>
+                </div>
+                <div class="contacts w-25">
+                    <h5 class="fw-bold">Contact Us</h5>
+                    <p>{!! $footer->contact_detail !!}</p>
+                </div>
+                <div class="socials w-25">
+                    <h5 class="fw-bold">Our Social Media</h5>
+                    <div class="row mt-2">
+                        @foreach($links as $key => $val)
+                        <div class="col-3">
+                            <a href="{{ $val->link }}">
+                                <img src="{{ asset('/file/'.$val->image) }}" alt="{{$val->image}}" style="width: 40px; height: 40px; object-fit: contain;">
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- END OF FOOTER -->
 
         <!-- Option 1: Bootstrap Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

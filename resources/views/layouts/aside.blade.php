@@ -71,6 +71,11 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="/admin/footer" class="nav-link text-white align-middle @if(\Request::route()->getName() == 'footer.index') __bg-primary @endif">
+                            <i data-feather="list"></i> <span class="ms-1">Footer</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
